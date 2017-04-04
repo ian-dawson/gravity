@@ -11,14 +11,16 @@ public class PendulumRunner {
     public static void main (String [] args) {
 	NumberFormat nf = NumberFormat.getInstance ();
 	nf.setMaximumFractionDigits (3);
+	
+	GravityConstant EarthGravity = new GravityConstant(9.80665);
 
 	double delta = (args.length == 0) ? .1 : Double.parseDouble (args[0]);
 	double sLen = 10, pMass = 10, theta0 = Math.PI/30;
-	RegularPendulum rp = new RegularPendulum (sLen, pMass, theta0, delta);
-	SimplePendulum sp = new SimplePendulum (sLen, pMass, theta0);
+	RegularPendulum rp = new RegularPendulum (sLen, pMass, theta0, delta, EarthGravity);
+	SimplePendulum sp = new SimplePendulum (sLen, pMass, theta0, EarthGravity);
 	RegularPendulum rpCoarse = 
-	    new RegularPendulum (sLen, pMass, theta0, .1);
-
+	    new RegularPendulum (sLen, pMass, theta0, .1, EarthGravity);
+	
 	// print out difference in displacement in 1 second intervals
 	// for 20 seconds
 	int iterations = (int) (1/delta);
